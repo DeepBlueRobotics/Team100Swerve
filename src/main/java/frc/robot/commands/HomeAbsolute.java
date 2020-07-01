@@ -54,10 +54,11 @@ public class HomeAbsolute extends Command {
     margin = SmartDashboard.getNumber("HomeAbsolute margin", 1.0);
     speed = SmartDashboard.getNumber("HomeAbsolute speed", 0.05);
 
-    if (!frZero) Robot.drivetrain.frederickTurn.set(ControlMode.PercentOutput, speed);
-    if (!flZero) Robot.drivetrain.fletcherTurn.set(ControlMode.PercentOutput, speed);
-    if (!blZero) Robot.drivetrain.blakeTurn.set(ControlMode.PercentOutput, speed);
-    if (!brZero) Robot.drivetrain.brianTurn.set(ControlMode.PercentOutput, speed);
+    // Use copySign to make sure that the motor controller steers in the direction of the setpoint
+    if (!frZero) Robot.drivetrain.frederickTurn.set(ControlMode.PercentOutput, Math.copySign(speed, Constants.FR_TURN_ZERO - Robot.drivetrain.frederickTurn.getSelectedSensorPosition()));
+    if (!flZero) Robot.drivetrain.fletcherTurn.set(ControlMode.PercentOutput, Math.copySign(speed, Constants.FL_TURN_ZERO - Robot.drivetrain.fletcherTurn.getSelectedSensorPosition()));
+    if (!blZero) Robot.drivetrain.blakeTurn.set(ControlMode.PercentOutput, Math.copySign(speed, Constants.BL_TURN_ZERO - Robot.drivetrain.blakeTurn.getSelectedSensorPosition()));
+    if (!brZero) Robot.drivetrain.brianTurn.set(ControlMode.PercentOutput, Math.copySign(speed, Constants.BR_TURN_ZERO - Robot.drivetrain.brianTurn.getSelectedSensorPosition()));
   }
 
   // Checks if each motor controller has turned until it is close to some known setpoint.
