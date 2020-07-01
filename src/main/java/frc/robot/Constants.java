@@ -22,6 +22,7 @@ public class Constants {
     public static final double BL_GEAR_RATIO = -1629;
     public static final double BR_GEAR_RATIO = -717;
 
+    // Analog encoder positions for each motor controller associated with all motor controllers facing forward.
 	public static final double FL_TURN_ZERO = -772.0;
 	public static final double FR_TURN_ZERO = -818.0;
 	public static final double BL_TURN_ZERO = 408.0;

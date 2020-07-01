@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -20,6 +21,9 @@ public class HomeAbsolute extends Command {
   boolean flZero = false;
   boolean blZero = false;
   boolean brZero = false;
+
+  double margin;
+  double speed;
 
   public HomeAbsolute() {
     // Use requires() here to declare subsystem dependencies
@@ -39,24 +43,38 @@ public class HomeAbsolute extends Command {
     Robot.drivetrain.frederickTurn.setSensorPhase(false);
     Robot.drivetrain.brianTurn.setSensorPhase(false);
 
-    Robot.drivetrain.frederickTurn.set(ControlMode.PercentOutput, 0.05);
-    Robot.drivetrain.fletcherTurn.set(ControlMode.PercentOutput, 0.05);
-    Robot.drivetrain.blakeTurn.set(ControlMode.PercentOutput, 0.05);
-    Robot.drivetrain.brianTurn.set(ControlMode.PercentOutput, 0.05);
+    SmartDashboard.putNumber("HomeAbsolute margin", 1.0);
+    SmartDashboard.putNumber("HomeAbsolute speed", 0.05);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    frZero = (int)(Robot.drivetrain.frederickTurn.getSelectedSensorPosition()) - Constants.FR_TURN_ZERO <= 1;
-    flZero = (int)(Robot.drivetrain.fletcherTurn.getSelectedSensorPosition()) - Constants.FL_TURN_ZERO <= 1;
-    blZero = (int)(Robot.drivetrain.blakeTurn.getSelectedSensorPosition()) - Constants.BL_TURN_ZERO <= 1;
-    brZero = (int)(Robot.drivetrain.brianTurn.getSelectedSensorPosition()) - Constants.BR_TURN_ZERO <= 1;
+    // Get the new margin and speed values.
+    margin = SmartDashboard.getNumber("HomeAbsolute margin", 1.0);
+    speed = SmartDashboard.getNumber("HomeAbsolute speed", 0.05);
+
+    if (!frZero) Robot.drivetrain.frederickTurn.set(ControlMode.PercentOutput, speed);
+    if (!flZero) Robot.drivetrain.fletcherTurn.set(ControlMode.PercentOutput, speed);
+    if (!blZero) Robot.drivetrain.blakeTurn.set(ControlMode.PercentOutput, speed);
+    if (!brZero) Robot.drivetrain.brianTurn.set(ControlMode.PercentOutput, speed);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Checks if each motor controller has turned until it is close to some known setpoint.
   @Override
   protected boolean isFinished() {
+    // Check if a motor controller is within a specified margin of the target value.
+    flZero = (Math.abs(Robot.drivetrain.frederickTurn.getSelectedSensorPosition() - Constants.FR_TURN_ZERO) <= margin);
+    flZero = (Math.abs(Robot.drivetrain.fletcherTurn.getSelectedSensorPosition() - Constants.FL_TURN_ZERO) <= margin);
+    blZero = (Math.abs(Robot.drivetrain.blakeTurn.getSelectedSensorPosition() - Constants.BL_TURN_ZERO) <= margin);
+    brZero = (Math.abs(Robot.drivetrain.brianTurn.getSelectedSensorPosition() - Constants.BR_TURN_ZERO) <= margin);
+
+    // If a motor controller is in the right position, stop moving it.
+    if (frZero) Robot.drivetrain.frederickTurn.set(ControlMode.PercentOutput, 0.0);
+    if (flZero) Robot.drivetrain.fletcherTurn.set(ControlMode.PercentOutput, 0.0);
+    if (blZero) Robot.drivetrain.blakeTurn.set(ControlMode.PercentOutput, 0.0);
+    if (brZero) Robot.drivetrain.brianTurn.set(ControlMode.PercentOutput, 0.0);
+
     return flZero && frZero && blZero && brZero;
   }
 

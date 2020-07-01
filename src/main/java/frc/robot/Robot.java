@@ -107,31 +107,34 @@ public class Robot extends TimedRobot {
     }
 
     private void updateDashboard() {
-        SmartDashboard.putNumber("FLA", drivetrain.fletcherTurn.getSensorCollection().getAnalogInRaw());
-        SmartDashboard.putNumber("FRA", drivetrain.frederickTurn.getSensorCollection().getAnalogInRaw());
-        SmartDashboard.putNumber("BLA", drivetrain.blakeTurn.getSensorCollection().getAnalogInRaw());
-        SmartDashboard.putNumber("BRA", drivetrain.brianTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Forward-Left Turn Analog Encoder", drivetrain.fletcherTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Forward-Right Turn Analog Encoder", drivetrain.frederickTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Backward-Left Turn Analog Encoder", drivetrain.blakeTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Backward-Right Turn Analog Encoder", drivetrain.brianTurn.getSensorCollection().getAnalogInRaw());
 
-        SmartDashboard.putNumber("FLQ", drivetrain.fletcherTurn.getSensorCollection().getQuadraturePosition());
-        SmartDashboard.putNumber("FRQ", drivetrain.frederickTurn.getSensorCollection().getQuadraturePosition());
-        SmartDashboard.putNumber("BLQ", drivetrain.blakeTurn.getSensorCollection().getQuadraturePosition());
-        SmartDashboard.putNumber("BRQ", drivetrain.brianTurn.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Forward-Left Turn Quadrature Encoder", drivetrain.fletcherTurn.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Forward-Right Turn Quadrature Encoder", drivetrain.frederickTurn.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Backward-Left Turn Quadrature Encoder", drivetrain.blakeTurn.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Backward-Right Turn Quadrature Encoder", drivetrain.brianTurn.getSensorCollection().getQuadraturePosition());
     
-        SmartDashboard.putNumber("FLS", drivetrain.fletcherTurn.getSelectedSensorPosition());
-        SmartDashboard.putNumber("FRS", drivetrain.frederickTurn.getSelectedSensorPosition());
-        SmartDashboard.putNumber("BLS", drivetrain.blakeTurn.getSelectedSensorPosition());
-        SmartDashboard.putNumber("BRS", drivetrain.brianTurn.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Forward-Left Turn Current Sensor Value", drivetrain.fletcherTurn.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Forward-Right Turn Current Sensor Value", drivetrain.frederickTurn.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Backward-Left Turn Current Sensor Value", drivetrain.blakeTurn.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Backward-Right Turn Current Sensor Value", drivetrain.brianTurn.getSelectedSensorPosition());
 
-        SmartDashboard.putString("FLE", drivetrain.fletcherTurn.getControlMode().toString());
-        SmartDashboard.putString("FRE", drivetrain.frederickTurn.getControlMode().toString());
-        SmartDashboard.putString("BLE", drivetrain.blakeTurn.getControlMode().toString());
-        SmartDashboard.putString("BRE", drivetrain.brianTurn.getControlMode().toString());
+        SmartDashboard.putString("Forward-Left Turn Control Mode", drivetrain.fletcherTurn.getControlMode().toString());
+        SmartDashboard.putString("Forward-Right Turn Control Mode", drivetrain.frederickTurn.getControlMode().toString());
+        SmartDashboard.putString("Backward-Left Turn Control Mode", drivetrain.blakeTurn.getControlMode().toString());
+        SmartDashboard.putString("Backward-Right Turn Control Mode", drivetrain.brianTurn.getControlMode().toString());
 
-        SmartDashboard.putNumber("FRV", drivetrain.frederickTurn.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Forward-Left Turn Applied Voltage", drivetrain.fletcherTurn.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Forward-Right Turn Applied Voltage", drivetrain.frederickTurn.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Backward-Left Turn Applied Voltage", drivetrain.blakeTurn.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Backward-Right Turn Applied Voltage", drivetrain.brianTurn.getMotorOutputVoltage());
 
-        SmartDashboard.putNumber("FLE", drivetrain.fletcherTurn.getClosedLoopError());
-        SmartDashboard.putNumber("FRE", drivetrain.frederickTurn.getClosedLoopError());
-        SmartDashboard.putNumber("BLE", drivetrain.blakeTurn.getClosedLoopError());
-        SmartDashboard.putNumber("BRE", drivetrain.brianTurn.getClosedLoopError());
+        SmartDashboard.putNumber("Forward-Left Turn Error", drivetrain.fletcherTurn.getClosedLoopError());
+        SmartDashboard.putNumber("Forward-Right Turn Error", drivetrain.frederickTurn.getClosedLoopError());
+        SmartDashboard.putNumber("Backward-Left Turn Error", drivetrain.blakeTurn.getClosedLoopError());
+        SmartDashboard.putNumber("Backward-Right Turn Error", drivetrain.brianTurn.getClosedLoopError());
     }
 }
