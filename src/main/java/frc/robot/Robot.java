@@ -107,10 +107,10 @@ public class Robot extends TimedRobot {
     }
 
     private void updateDashboard() {
-        SmartDashboard.putNumber("Forward-Left Turn Analog Encoder", drivetrain.fletcherTurn.getSensorCollection().getAnalogInRaw());
-        SmartDashboard.putNumber("Forward-Right Turn Analog Encoder", drivetrain.frederickTurn.getSensorCollection().getAnalogInRaw());
-        SmartDashboard.putNumber("Backward-Left Turn Analog Encoder", drivetrain.blakeTurn.getSensorCollection().getAnalogInRaw());
-        SmartDashboard.putNumber("Backward-Right Turn Analog Encoder", drivetrain.brianTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Forward-Left Turn Analog Encoder", drivetrain.fletcherTurn.getSensorCollection().getAnalogIn());
+        SmartDashboard.putNumber("Forward-Right Turn Analog Encoder", drivetrain.frederickTurn.getSensorCollection().getAnalogIn());
+        SmartDashboard.putNumber("Backward-Left Turn Analog Encoder", drivetrain.blakeTurn.getSensorCollection().getAnalogIn());
+        SmartDashboard.putNumber("Backward-Right Turn Analog Encoder", drivetrain.brianTurn.getSensorCollection().getAnalogIn());
 
         SmartDashboard.putNumber("Forward-Left Turn Quadrature Encoder", drivetrain.fletcherTurn.getSensorCollection().getQuadraturePosition());
         SmartDashboard.putNumber("Forward-Right Turn Quadrature Encoder", drivetrain.frederickTurn.getSensorCollection().getQuadraturePosition());
