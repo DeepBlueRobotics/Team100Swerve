@@ -24,7 +24,7 @@ public class Constants {
     public static final double FL_GEAR_RATIO = -1656.67;
     public static final double FR_GEAR_RATIO = -1656.67;
     public static final double BL_GEAR_RATIO = -1656.67;
-    // There is a n unknown issue with the BR gearbox that makes the pulse per revolution equal to 3.
+    // There is an unknown issue with the BR gearbox that makes the pulse per revolution equal to 3.
     // Gear ratio = 40/48 * 71 * 3 * 4 = 710
     public static final double BR_GEAR_RATIO = -710;
 
