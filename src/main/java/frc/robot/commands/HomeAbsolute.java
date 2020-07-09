@@ -65,22 +65,22 @@ public class HomeAbsolute extends Command {
     // Use copySign to make sure that the motor controller steers in the direction of the setpoint
     if (!frZero) {
       setAngle(Robot.drivetrain.frederickTurn, 
-               Math.copySign(angle, Constants.FR_TURN_ZERO - Robot.drivetrain.frederickTurn.getSelectedSensorPosition()),
+               Math.copySign(angle, Constants.FR_TURN_ZERO - Robot.drivetrain.frederickTurn.getSensorCollection().getAnalogIn()),
                Constants.FR_GEAR_RATIO);
     }
     if (!flZero)  {
       setAngle(Robot.drivetrain.fletcherTurn,
-               Math.copySign(angle, Constants.FL_TURN_ZERO - Robot.drivetrain.fletcherTurn.getSelectedSensorPosition()),
+               Math.copySign(angle, Constants.FL_TURN_ZERO - Robot.drivetrain.fletcherTurn.getSensorCollection().getAnalogIn()),
                Constants.FL_GEAR_RATIO);
     }
     if (!blZero) {
       setAngle(Robot.drivetrain.blakeTurn,
-               Math.copySign(angle, Constants.BL_TURN_ZERO - Robot.drivetrain.blakeTurn.getSelectedSensorPosition()),
+               Math.copySign(angle, Constants.BL_TURN_ZERO - Robot.drivetrain.blakeTurn.getSensorCollection().getAnalogIn()),
                Constants.BL_GEAR_RATIO);
     }
     if (!brZero) {
       setAngle(Robot.drivetrain.brianTurn,
-               Math.copySign(angle, Constants.BR_TURN_ZERO - Robot.drivetrain.brianTurn.getSelectedSensorPosition()),
+               Math.copySign(angle, Constants.BR_TURN_ZERO - Robot.drivetrain.brianTurn.getSensorCollection().getAnalogIn()),
                Constants.BR_GEAR_RATIO);
     }
   }
