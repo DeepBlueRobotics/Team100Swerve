@@ -33,6 +33,11 @@ public class Drivetrain extends Subsystem {
     public WPI_TalonSRX blakeTurn;
     public WPI_TalonSRX brianTurn;
 
+    public CanTalonSwerveEnclosure swerveEnclosureFL;
+    public CanTalonSwerveEnclosure swerveEnclosureFR;
+    public CanTalonSwerveEnclosure swerveEnclosureBL;
+    public CanTalonSwerveEnclosure swerveEnclosureBR;
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new Drive());
@@ -49,12 +54,12 @@ public class Drivetrain extends Subsystem {
         WPI_TalonSRX blakeDrive = new WPI_TalonSRX(Constants.BL_DRIVE_CANID);
         WPI_TalonSRX brianDrive = new WPI_TalonSRX(Constants.BR_DRIVE_CANID);
 
-        CanTalonSwerveEnclosure se1 = new CanTalonSwerveEnclosure("enc 1", frederickDrive, frederickTurn, Constants.FR_GEAR_RATIO, Constants.DRIVE_MODIFIER);
-        CanTalonSwerveEnclosure se2 = new CanTalonSwerveEnclosure("enc 2", fletcherDrive, fletcherTurn, Constants.FL_GEAR_RATIO, -Constants.DRIVE_MODIFIER);
-        CanTalonSwerveEnclosure se3 = new CanTalonSwerveEnclosure("enc 3", blakeDrive, blakeTurn, Constants.BL_GEAR_RATIO, -Constants.DRIVE_MODIFIER);
-        CanTalonSwerveEnclosure se4 = new CanTalonSwerveEnclosure("enc 4", brianDrive, brianTurn, Constants.BR_GEAR_RATIO, Constants.DRIVE_MODIFIER);
+        swerveEnclosureFR = new CanTalonSwerveEnclosure("enc 1", frederickDrive, frederickTurn, Constants.FR_GEAR_RATIO, Constants.DRIVE_MODIFIER);
+        swerveEnclosureFL = new CanTalonSwerveEnclosure("enc 2", fletcherDrive, fletcherTurn, Constants.FL_GEAR_RATIO, -Constants.DRIVE_MODIFIER);
+        swerveEnclosureBL = new CanTalonSwerveEnclosure("enc 3", blakeDrive, blakeTurn, Constants.BL_GEAR_RATIO, -Constants.DRIVE_MODIFIER);
+        swerveEnclosureBR = new CanTalonSwerveEnclosure("enc 4", brianDrive, brianTurn, Constants.BR_GEAR_RATIO, Constants.DRIVE_MODIFIER);
 
-        swerveDrive = new SwerveDrive(se1, se2, se3, se4, frameWidth, frameLength);
+        swerveDrive = new SwerveDrive(swerveEnclosureFR, swerveEnclosureFL, swerveEnclosureBL, swerveEnclosureBR, frameWidth, frameLength);
         swerveDrive.setCentricMode(CentricMode.FIELD);
     }
 

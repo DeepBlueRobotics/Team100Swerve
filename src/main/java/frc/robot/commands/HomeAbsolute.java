@@ -24,18 +24,13 @@ public class HomeAbsolute extends Command {
   boolean brZero = false;
 
   double margin;
-  double angle;
+  double speed;
 
   public HomeAbsolute() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drivetrain);
   }
-
-  // Copy of the setAngle method defined in CanTalonSwerveEnclosure to avoid creating excess swerve enclosures.
-  private void setAngle(WPI_TalonSRX steerMotor, double angle, double gearRatio) {
-    steerMotor.set(ControlMode.Position,  angle * gearRatio);
-  }
-
+  
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -60,28 +55,24 @@ public class HomeAbsolute extends Command {
   protected void execute() {
     // Get the new margin and speed values.
     margin = SmartDashboard.getNumber("HomeAbsolute margin", 1.0);
-    angle = SmartDashboard.getNumber("HomeAbsolute angle", 0.05);
+    speed = SmartDashboard.getNumber("HomeAbsolute speed", 0.05);
 
     // Use copySign to make sure that the motor controller steers in the direction of the setpoint
     if (!frZero) {
-      setAngle(Robot.drivetrain.frederickTurn, 
-               Math.copySign(angle, Constants.FR_TURN_ZERO - Robot.drivetrain.frederickTurn.getSensorCollection().getAnalogIn()),
-               Constants.FR_GEAR_RATIO);
+      Robot.drivetrain.swerveEnclosureFR.move(0.0,
+        Math.copySign(speed, Constants.FR_TURN_ZERO - Robot.drivetrain.frederickTurn.getSensorCollection().getAnalogIn()));
     }
     if (!flZero)  {
-      setAngle(Robot.drivetrain.fletcherTurn,
-               Math.copySign(angle, Constants.FL_TURN_ZERO - Robot.drivetrain.fletcherTurn.getSensorCollection().getAnalogIn()),
-               Constants.FL_GEAR_RATIO);
+      Robot.drivetrain.swerveEnclosureFL.move(0.0,
+        Math.copySign(speed, Constants.FL_TURN_ZERO - Robot.drivetrain.fletcherTurn.getSensorCollection().getAnalogIn()));
     }
     if (!blZero) {
-      setAngle(Robot.drivetrain.blakeTurn,
-               Math.copySign(angle, Constants.BL_TURN_ZERO - Robot.drivetrain.blakeTurn.getSensorCollection().getAnalogIn()),
-               Constants.BL_GEAR_RATIO);
+      Robot.drivetrain.swerveEnclosureBL.move(0.0,
+        Math.copySign(speed, Constants.BL_TURN_ZERO - Robot.drivetrain.blakeTurn.getSensorCollection().getAnalogIn()));
     }
     if (!brZero) {
-      setAngle(Robot.drivetrain.brianTurn,
-               Math.copySign(angle, Constants.BR_TURN_ZERO - Robot.drivetrain.brianTurn.getSensorCollection().getAnalogIn()),
-               Constants.BR_GEAR_RATIO);
+      Robot.drivetrain.swerveEnclosureBR.move(0.0,
+        Math.copySign(speed, Constants.BR_TURN_ZERO - Robot.drivetrain.brianTurn.getSensorCollection().getAnalogIn()));
     }
   }
 
