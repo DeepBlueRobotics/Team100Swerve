@@ -24,14 +24,12 @@ public class Constants {
     public static final double FL_GEAR_RATIO = -1656.67;
     public static final double FR_GEAR_RATIO = -1656.67;
     public static final double BL_GEAR_RATIO = -1656.67;
-    // There is an unknown issue with the BR gearbox that makes the pulse per revolution equal to 3.
-    // Gear ratio = 40/48 * 71 * 3 * 4 = 710
-    public static final double BR_GEAR_RATIO = -710;
+    public static final double BR_GEAR_RATIO = -1656.67;
 
     // Analog encoder positions for each motor controller associated with all motor controllers facing forward.
     // All motors will be facing in the same direction toward the front of the robot.
     public static final double FL_TURN_ZERO = 758.0;
     public static final double FR_TURN_ZERO = 807.0;
     public static final double BL_TURN_ZERO = 406.0;
-	public static final double BR_TURN_ZERO = 772.0;
+	public static final double BR_TURN_ZERO = 2217.0;
 }
