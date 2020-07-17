@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.StickDirection;
+import frc.robot.Constants.StickType;
 import frc.robot.subsystems.Drivetrain;
 
 /**
@@ -107,6 +109,10 @@ public class Robot extends TimedRobot {
     }
 
     private void updateDashboard() {
+        SmartDashboard.putNumber("Left Joystick Y",  Robot.oi.getStickValue(StickType.LEFT, StickDirection.Y));
+        SmartDashboard.putNumber("Left Joystick X",  Robot.oi.getStickValue(StickType.LEFT, StickDirection.X));
+        SmartDashboard.putNumber("Right Joystick X",  Robot.oi.getStickValue(StickType.RIGHT, StickDirection.X));
+
         SmartDashboard.putNumber("Forward-Left Turn Analog Encoder", drivetrain.fletcherTurn.getSensorCollection().getAnalogIn());
         SmartDashboard.putNumber("Forward-Right Turn Analog Encoder", drivetrain.frederickTurn.getSensorCollection().getAnalogIn());
         SmartDashboard.putNumber("Backward-Left Turn Analog Encoder", drivetrain.blakeTurn.getSensorCollection().getAnalogIn());
