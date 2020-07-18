@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.Constants.StickDirection;
 import frc.robot.Constants.StickType;
@@ -30,7 +31,7 @@ public class Drive extends Command {
     @Override
     protected void execute() {
         double leftStickY = Robot.oi.getStickValue(StickType.LEFT, StickDirection.Y);
-        if (Math.abs(leftStickY) < 0.008) leftStickY = 0.0;
+        if (Math.abs(leftStickY) < Constants.LEFT_JOY_Y_THRESHOLD) leftStickY = 0.0;
         Robot.drivetrain.swerveDrive.move(  leftStickY,   //Straight
                                             Robot.oi.getStickValue(StickType.LEFT, StickDirection.X),   //Strafe
                                             Robot.oi.getStickValue(StickType.RIGHT, StickDirection.X),  //Rotate
