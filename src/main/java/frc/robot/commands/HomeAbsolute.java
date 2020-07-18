@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
@@ -22,7 +23,7 @@ public class HomeAbsolute extends InstantCommand {
   double brQuadPos;
 
   public HomeAbsolute() {
-    // Use requires() here to declare subsystem dependencies
+    setRunWhenDisabled(true);
   }
 
   // Called just before this Command runs the first time
@@ -38,20 +39,16 @@ public class HomeAbsolute extends InstantCommand {
     // Change the current quadrature encoder position to the difference between the zeroed position and the current position, as measured by the analog encoder.
     // Difference is in analog encoder degrees which must be converted to quadrature encoder ticks.
     // Max value of the analog encoder is 1023, min value is 0.
-    flQuadPos = (Math.abs(Constants.FL_GEAR_RATIO) / 1024.0) * (Robot.drivetrain.fletcherTurn.getSensorCollection().getAnalogIn() - Constants.FL_TURN_ZERO);
-    frQuadPos = (Math.abs(Constants.FR_GEAR_RATIO) / 1024.0) * (Robot.drivetrain.frederickTurn.getSensorCollection().getAnalogIn() - Constants.FR_TURN_ZERO);
-    blQuadPos = (Math.abs(Constants.BL_GEAR_RATIO) / 1024.0) * (Robot.drivetrain.blakeTurn.getSensorCollection().getAnalogIn() - Constants.BL_TURN_ZERO);
-    brQuadPos = (Math.abs(Constants.BR_GEAR_RATIO) / 1024.0) * (Robot.drivetrain.brianTurn.getSensorCollection().getAnalogIn() - Constants.BR_TURN_ZERO);
+    flQuadPos = (Math.abs(Constants.FL_GEAR_RATIO) / Constants.FL_MAX_ANALOG) * (Robot.drivetrain.fletcherTurn.getSensorCollection().getAnalogInRaw() - Constants.FL_TURN_ZERO);
+    frQuadPos = (Math.abs(Constants.FR_GEAR_RATIO) / Constants.FR_MAX_ANALOG) * (Robot.drivetrain.frederickTurn.getSensorCollection().getAnalogInRaw() - Constants.FR_TURN_ZERO);
+    blQuadPos = (Math.abs(Constants.BL_GEAR_RATIO) / Constants.BL_MAX_ANALOG) * (Robot.drivetrain.blakeTurn.getSensorCollection().getAnalogInRaw() - Constants.BL_TURN_ZERO);
+    brQuadPos = (Math.abs(Constants.BR_GEAR_RATIO) / Constants.BR_MAX_ANALOG) * (Robot.drivetrain.brianTurn.getSensorCollection().getAnalogInRaw() - Constants.BR_TURN_ZERO);
     
     SmartDashboard.putNumber("Expected FL QuadPos", flQuadPos);
     SmartDashboard.putNumber("Expected FR QuadPos", frQuadPos);
     SmartDashboard.putNumber("Expected BL QuadPos", blQuadPos);
     SmartDashboard.putNumber("Expected BR QuadPos", brQuadPos);
-    System.out.println("Expected FL QuadPos: " + flQuadPos);
-    System.out.println("Expected FR QuadPos: " + frQuadPos);
-    System.out.println("Expected BL QuadPos: " + blQuadPos);
-    System.out.println("Expected BR QuadPos: " + brQuadPos);
-
+    
     ErrorCode e;
     e = Robot.drivetrain.fletcherTurn.setSelectedSensorPosition((int) flQuadPos);
     if (e != ErrorCode.OK) System.out.println("Received error code #" + e.value + " when setting selected sensor position for FL.");
@@ -61,5 +58,10 @@ public class HomeAbsolute extends InstantCommand {
     if (e != ErrorCode.OK) System.out.println("Received error code #" + e.value + " when setting selected sensor position for BL.");
     e = Robot.drivetrain.brianTurn.setSelectedSensorPosition((int) brQuadPos);
     if (e != ErrorCode.OK) System.out.println("Received error code #" + e.value + " when setting selected sensor position for BR.");
+  
+    Robot.drivetrain.fletcherTurn.set(ControlMode.Position, 0.0);
+    Robot.drivetrain.frederickTurn.set(ControlMode.Position, 0.0);
+    Robot.drivetrain.brianTurn.set(ControlMode.Position, 0.0);
+    Robot.drivetrain.blakeTurn.set(ControlMode.Position, 0.0);
   }
 }

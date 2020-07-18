@@ -113,6 +113,11 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Left Joystick X",  Robot.oi.getStickValue(StickType.LEFT, StickDirection.X));
         SmartDashboard.putNumber("Right Joystick X",  Robot.oi.getStickValue(StickType.RIGHT, StickDirection.X));
 
+        SmartDashboard.putNumber("Forward-Left Turn Analog Encoder Raw", drivetrain.fletcherTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Forward-Right Turn Analog Encoder Raw", drivetrain.frederickTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Backward-Left Turn Analog Encoder Raw", drivetrain.blakeTurn.getSensorCollection().getAnalogInRaw());
+        SmartDashboard.putNumber("Backward-Right Turn Analog Encoder Raw", drivetrain.brianTurn.getSensorCollection().getAnalogInRaw());
+
         SmartDashboard.putNumber("Forward-Left Turn Analog Encoder", drivetrain.fletcherTurn.getSensorCollection().getAnalogIn());
         SmartDashboard.putNumber("Forward-Right Turn Analog Encoder", drivetrain.frederickTurn.getSensorCollection().getAnalogIn());
         SmartDashboard.putNumber("Backward-Left Turn Analog Encoder", drivetrain.blakeTurn.getSensorCollection().getAnalogIn());

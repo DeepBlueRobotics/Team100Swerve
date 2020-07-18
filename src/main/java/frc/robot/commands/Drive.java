@@ -29,7 +29,9 @@ public class Drive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.drivetrain.swerveDrive.move(  Robot.oi.getStickValue(StickType.LEFT, StickDirection.Y),   //Straight
+        double leftStickY = Robot.oi.getStickValue(StickType.LEFT, StickDirection.Y);
+        if (Math.abs(leftStickY) < 0.008) leftStickY = 0.0;
+        Robot.drivetrain.swerveDrive.move(  leftStickY,   //Straight
                                             Robot.oi.getStickValue(StickType.LEFT, StickDirection.X),   //Strafe
                                             Robot.oi.getStickValue(StickType.RIGHT, StickDirection.X),  //Rotate
                                             (double)(Robot.ahrs.getFusedHeading()));                    //NavX
